@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,7 +11,7 @@ import exercises  from './defaultExercises.js';
 
 const App: () => React$Node = () => {
 
-	const list = [];
+	const [list, setList] = useState([]);
 
 	useEffect(() => {
 		AsyncStorage.getItem("alreadyLaunched").then(value => {
@@ -21,28 +21,22 @@ const App: () => React$Node = () => {
 			}
 			GetExercises();
 		})
-	});
+	},[]);
 
 	function GetExercises() {
-		let currentIteration = 1;
-		AsyncStorage.getItem('@exercise' + currentIteration).then(value => {
+		AsyncStorage.getItem('@exercises').then(value => {
 			if (value != null) {
-				list.push(JSON.parse(value));
-				currentIteration++;
-			} else {
-				return;
+				setList(list.concat(JSON.parse(value)));
 			}
 		})
 	}
 
 	async function StoreExercises() {
-		for (const exercise of exercises) {
 		try {
-			await AsyncStorage.setItem('@exercise' + exercise.id, JSON.stringify(exercise))
+			await AsyncStorage.setItem('@exercises', JSON.stringify(exercises))
 		}
 		catch (e) {
 			console.log(e);
-		}
 		}
 	}
 
