@@ -31,9 +31,9 @@ const App: () => React$Node = () => {
 		})
 	}
 
-	async function StoreExercises() {
+	function StoreExercises() {
 		try {
-			await AsyncStorage.setItem('@exercises', JSON.stringify(exercises))
+			AsyncStorage.setItem('@exercises', JSON.stringify(exercises))
 		}
 		catch (e) {
 			console.log(e);
