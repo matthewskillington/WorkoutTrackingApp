@@ -1,26 +1,13 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   ScrollView,
-  View,
-  Text,
-  StatusBar,
 } from 'react-native';
 import ExerciseItemComponent from './components/ExerciseItem/ExerciseItem';
 import HeaderComponent from './components/Header/Header';
 
-const exercises = [
-  {
-    name: 'Dumbbell Curl',
-    lastPerformed: null,
+import exercises  from './defaultExercises.js';
 
-  },
-  {
-    name: 'Side elevations',
-    lastPerformed: null
-  }
-];
 
 const App: () => React$Node = () => {
   return (
@@ -30,15 +17,17 @@ const App: () => React$Node = () => {
           height: `100%`
         }}>
         <HeaderComponent />
-        <View
+        <ScrollView
           style={{
+            backgroundColor: '#CCC',
+            height: '100%'
           }}>
           {exercises.map((exercise) => {
             return (
-              <ExerciseItemComponent name={exercise.name}/>
+              <ExerciseItemComponent name={exercise.name} lastPerformed={exercise.lastPerformed}/>
             )
           })}
-        </View>
+        </ScrollView>
       </SafeAreaView>
     </>
   );
