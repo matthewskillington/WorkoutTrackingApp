@@ -1,36 +1,44 @@
 const ExerciseList = [
     {
+      key: 1,
       name: 'Dumbbell Curl',
-      lastPerformed: null,
+      lastPerformed: ""
   
     },
     {
+      key: 2,
       name: 'Dumbbell Row',
-      lastPerformed: null
+      lastPerformed: ""
     },
     {
+      key: 3,
       name: 'Front Elevations',
-      lastPerformed: null
+      lastPerformed: ""
     },
     {
-      name: 'Side Elevations',
-      lastPerformed: null
+      key: 4,
+      name: 'Skeye Elevations',
+      lastPerformed: ""
     },
     {
+      key: 5,
       name: 'Dumbbell Shrugs',
-      lastPerformed: null
+      lastPerformed: ""
     },
     {
+      key: 6,
       name: 'Dumbbell Pull Over',
-      lastPerformed: null
+      lastPerformed: ""
     },
     {
+      key: 7,
       name: 'Tricep Extensions',
-      lastPerformed: null
+      lastPerformed: ""
     },
     {
+      key: 8,
       name: 'Wrist Extensions',
-      lastPerformed: null
+      lastPerformed: ""
     }
 ];
   

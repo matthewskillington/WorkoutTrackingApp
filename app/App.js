@@ -1,4 +1,5 @@
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,6 +11,20 @@ import exercises  from './defaultExercises.js';
 
 
 const App: () => React$Node = () => {
+  useEffect(() => {
+    async function StoreExercises() {
+      for (const exercise of exercises) {
+        try {
+          await AsyncStorage.setItem('@exercise' + exercise.key, JSON.stringify(exercise))
+        }
+        catch (e) {
+          console.log(e);
+        }
+      }
+    }
+    StoreExercises();
+  });
+
   return (
     <>
       <SafeAreaView
