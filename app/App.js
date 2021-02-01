@@ -1,17 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
+  	SafeAreaView,
+	ScrollView
 } from 'react-native';
 import ExerciseItemComponent from './components/ExerciseItem/ExerciseItem';
 import HeaderComponent from './components/Header/Header';
+import CustomModal from './components/Modal/Modal';
 import exercises  from './defaultExercises.js';
 
 
 const App: () => React$Node = () => {
 
 	const [list, setList] = useState([]);
+	const [modalVisible, setModalVisible] = useState(true);
 
 	useEffect(() => {
 		AsyncStorage.getItem("alreadyLaunched").then(value => {
@@ -46,6 +48,9 @@ const App: () => React$Node = () => {
 			style={{
 			height: `100%`
 			}}>
+			<CustomModal
+				modalVisible={modalVisible}
+				closeHandler={setModalVisible} />	
 			<HeaderComponent />
 			<ScrollView
 			style={{
@@ -54,7 +59,10 @@ const App: () => React$Node = () => {
 			}}>
 			{list.map((exercise) => {
 				return (
-					<ExerciseItemComponent key={exercise.name} name={exercise.name} lastPerformed={exercise.lastPerformed}/>
+					<ExerciseItemComponent
+						key={exercise.name}
+						name={exercise.name} l
+						astPerformed={exercise.lastPerformed} />
 				)
 			})}
 			</ScrollView>

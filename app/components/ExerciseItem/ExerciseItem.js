@@ -34,8 +34,7 @@ const ExerciseItemComponent = (props) => {
                 }}>
                 <Button
                     title="Log exercise"
-                    color="#FFF"
-                    />
+                    color="#FFF"/>
             </View>
             
         </View>
