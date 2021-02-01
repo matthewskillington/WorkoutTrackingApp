@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   Alert,
   Modal,
   StyleSheet,
   Text,
+  TextInput,
   TouchableHighlight,
-  View
-} from "react-native";
+  View,
+} from 'react-native';
 
 const CustomModal = (props) => {
-  
+  const [repValue, ChangeReps] = React.useState('Reps');
+  const [setValue, ChangeSets] = React.useState('Sets');
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -17,19 +20,40 @@ const CustomModal = (props) => {
         transparent={true}
         visible={props.modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
-      >
+          Alert.alert('Modal has been closed.');
+        }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>Reps</Text>
+            <TextInput
+              style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+                justifyContent: 'flex-start',
+                width: '100%',
+              }}
+              onChangeText={(text) => ChangeReps(text)}
+              value={repValue}
+            />
+            <Text style={styles.modalText}>Sets</Text>
+            <TextInput
+              style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+                justifyContent: 'flex-start',
+                width: '100%',
+              }}
+              onChangeText={(text) => ChangeSets(text)}
+              value={setValue}
+            />
 
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              style={{...styles.openButton, backgroundColor: '#2196F3'}}
               onPress={() => {
-                  props.closeHandler(!props.modalVisible);
-              }}
-            >
+                props.closeHandler(!props.modalVisible);
+              }}>
               <Text style={styles.textStyle}>Hide Modal</Text>
             </TouchableHighlight>
           </View>
@@ -42,40 +66,39 @@ const CustomModal = (props) => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
   },
   modalView: {
+    width: '80%',
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
   openButton: {
-    backgroundColor: "#F194FF",
+    backgroundColor: '#F194FF',
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
-  }
+  },
 });
 
 export default CustomModal;
