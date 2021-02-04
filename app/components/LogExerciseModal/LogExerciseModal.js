@@ -4,7 +4,7 @@ import {Alert, Modal, Text, TouchableHighlight, View} from 'react-native';
 import styles from '../../styles/appStyles.js';
 import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel.js';
 
-const CustomModal = (props) => {
+const LogExerciseModal = (props) => {
   const [repValue, ChangeReps] = React.useState('0');
   const [setValue, ChangeSets] = React.useState('0');
 
@@ -53,4 +53,4 @@ const CustomModal = (props) => {
   );
 };
 
-export default CustomModal;
+export default LogExerciseModal;

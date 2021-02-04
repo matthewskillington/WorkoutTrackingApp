@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import ExerciseItemComponent from './components/ExerciseItem/ExerciseItem';
 import HeaderComponent from './components/Header/Header';
-import CustomModal from './components/CustomModal/CustomModal';
+import LogExerciseModal from './components/LogExerciseModal/LogExerciseModal';
 import exercises from './defaultExercises.js';
 
 const App: () => React$Node = () => {
@@ -50,7 +50,7 @@ const App: () => React$Node = () => {
         style={{
           height: `100%`,
         }}>
-        <CustomModal
+        <LogExerciseModal
           modalVisible={modalVisible}
           closeHandler={setModalVisible}
           title={listSelection.name}
