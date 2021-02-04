@@ -37,7 +37,8 @@ const App: () => React$Node = () => {
     }
   }
 
-  //exercise for the exercise to track
+  // Exercise parameter is the exercise to be set as the current selection
+  // Selected exercise is what data will be logged against
   function OpenModal(exercise) {
     setModalVisible(true);
     setSelection(exercise);
