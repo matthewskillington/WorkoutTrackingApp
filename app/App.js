@@ -1,74 +1,78 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
-import {
-  	SafeAreaView,
-	ScrollView
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, ScrollView} from 'react-native';
 import ExerciseItemComponent from './components/ExerciseItem/ExerciseItem';
 import HeaderComponent from './components/Header/Header';
-import CustomModal from './components/Modal/Modal';
-import exercises  from './defaultExercises.js';
-
+import CustomModal from './components/CustomModal/CustomModal';
+import exercises from './defaultExercises.js';
 
 const App: () => React$Node = () => {
+  const [list, setList] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [listSelection, setSelection] = useState('');
 
-	const [list, setList] = useState([]);
-	const [modalVisible, setModalVisible] = useState(true);
+  useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value == null) {
+        AsyncStorage.setItem('alreadyLaunched', JSON.stringify(true));
+        StoreExercises();
+      }
+      GetExercises();
+    });
+  }, []);
 
-	useEffect(() => {
-		AsyncStorage.getItem("alreadyLaunched").then(value => {
-			if (value == null) {
-				AsyncStorage.setItem("alreadyLaunched", JSON.stringify(true));
-				StoreExercises();
-			}
-			GetExercises();
-		})
-	},[]);
+  function GetExercises() {
+    AsyncStorage.getItem('@exercises').then((value) => {
+      if (value != null) {
+        setList(list.concat(JSON.parse(value)));
+      }
+    });
+  }
 
-	function GetExercises() {
-		AsyncStorage.getItem('@exercises').then(value => {
-			if (value != null) {
-				setList(list.concat(JSON.parse(value)));
-			}
-		})
-	}
+  function StoreExercises() {
+    try {
+      AsyncStorage.setItem('@exercises', JSON.stringify(exercises));
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-	function StoreExercises() {
-		try {
-			AsyncStorage.setItem('@exercises', JSON.stringify(exercises))
-		}
-		catch (e) {
-			console.log(e);
-		}
-	}
+  //exercise for the exercise to track
+  function OpenModal(exercise) {
+    setModalVisible(true);
+    setSelection(exercise);
+  }
 
-	return (
-		<>
-		<SafeAreaView
-			style={{
-			height: `100%`
-			}}>
-			<CustomModal
-				modalVisible={modalVisible}
-				closeHandler={setModalVisible} />	
-			<HeaderComponent />
-			<ScrollView
-			style={{
-				backgroundColor: '#CCC',
-				height: '100%'
-			}}>
-			{list.map((exercise) => {
-				return (
-					<ExerciseItemComponent
-						key={exercise.name}
-						name={exercise.name} l
-						astPerformed={exercise.lastPerformed} />
-				)
-			})}
-			</ScrollView>
-		</SafeAreaView>
-		</>
-	);
+  return (
+    <>
+      <SafeAreaView
+        style={{
+          height: `100%`,
+        }}>
+        <CustomModal
+          modalVisible={modalVisible}
+          closeHandler={setModalVisible}
+          title={listSelection.name}
+        />
+        <HeaderComponent />
+        <ScrollView
+          style={{
+            backgroundColor: '#CCC',
+            height: '100%',
+          }}>
+          {list.map((exercise) => {
+            return (
+              <ExerciseItemComponent
+                key={exercise.name}
+                onPressHandler={OpenModal}
+                exerciseItem={exercise}
+              />
+            );
+          })}
+        </ScrollView>
+      </SafeAreaView>
+    </>
+  );
 };
 
 export default App;
