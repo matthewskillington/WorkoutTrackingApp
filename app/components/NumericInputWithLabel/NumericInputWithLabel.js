@@ -18,6 +18,7 @@ const NumericInputWithLabel = (props) => {
           justifyContent: 'flex-start',
           width: '100%',
         }}
+        //Regex prevents non numeric input into the fields
         onChangeText={(text) =>
           props.onChangeHandler(text.replace(/[^0-9]/g, ''))
         }

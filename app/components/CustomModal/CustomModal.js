@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Modal,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {Alert, Modal, Text, TouchableHighlight, View} from 'react-native';
 
 import styles from '../../styles/appStyles.js';
 import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel.js';
