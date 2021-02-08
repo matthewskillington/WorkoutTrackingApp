@@ -21,17 +21,32 @@ const App: () => React$Node = () => {
     });
   }, []);
 
-  function GetExercises() {
-    AsyncStorage.getItem('@exercises').then((value) => {
-      if (value != null) {
-        setList(list.concat(JSON.parse(value)));
+  async function GetExercises() {
+    try {
+      var ids = JSON.parse(await AsyncStorage.getItem('exerciseList'));
+      var listFromDb = [];
+      for (const id of ids) {
+        const value = await AsyncStorage.getItem('exercise' + id);
+        if (value != null) {
+          listFromDb.push(JSON.parse(value));
+        }
       }
-    });
+      setList(listFromDb);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function StoreExercises() {
     try {
-      AsyncStorage.setItem('@exercises', JSON.stringify(exercises));
+      exercises.forEach((exercise) => {
+        AsyncStorage.setItem(
+          'exercise' + exercise.id,
+          JSON.stringify(exercise),
+        );
+      });
+      var listOfIds = exercises.map((item) => item.id);
+      AsyncStorage.setItem('exerciseList', JSON.stringify(listOfIds));
     } catch (e) {
       console.log(e);
     }
