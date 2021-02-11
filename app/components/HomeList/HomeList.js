@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
-import ExerciseItemComponent from '../ExerciseItem/ExerciseItem';
-import HeaderComponent from '../Header/Header';
+import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import ExerciseItem from '../ExerciseItem/ExerciseItem';
+import Header from '../Header/Header';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
 import exercises from '../../defaultExercises.js';
 
-const HomeListComponent = () => {
+const HomeList = () => {
   const [list, setList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [listSelection, setSelection] = useState('');
@@ -61,24 +61,17 @@ const HomeListComponent = () => {
 
   return (
     <>
-      <SafeAreaView
-        style={{
-          height: `100%`,
-        }}>
+      <SafeAreaView style={styles.safeArea}>
         <LogExerciseModal
           modalVisible={modalVisible}
           closeHandler={setModalVisible}
           title={listSelection.name}
         />
-        <HeaderComponent />
-        <ScrollView
-          style={{
-            backgroundColor: '#CCC',
-            height: '100%',
-          }}>
+        <Header />
+        <ScrollView style={styles.scrollView}>
           {list.map((exercise) => {
             return (
-              <ExerciseItemComponent
+              <ExerciseItem
                 key={exercise.name}
                 onPressHandler={OpenModal}
                 exerciseItem={exercise}
@@ -91,4 +84,14 @@ const HomeListComponent = () => {
   );
 };
 
-export default HomeListComponent;
+const styles = StyleSheet.create({
+  safeArea: {
+    height: '100%',
+  },
+  scrollView: {
+    backgroundColor: '#CCC',
+    height: '100%',
+  },
+});
+
+export default HomeList;

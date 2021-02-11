@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
-import styles from '../../styles/appStyles.js';
+import {View, Text, TextInput, StyleSheet} from 'react-native';
 
 const NumericInputWithLabel = (props) => {
   return (
@@ -8,16 +7,9 @@ const NumericInputWithLabel = (props) => {
       style={{
         marginBottom: 20,
       }}>
-      <Text style={styles.modalText}>{props.label}</Text>
+      <Text styles={styles.inputLabel}>{props.label}</Text>
       <TextInput
-        style={{
-          paddingLeft: 10,
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
-          justifyContent: 'flex-start',
-          width: '100%',
-        }}
+        style={styles.input}
         //Regex prevents non numeric input into the fields
         onChangeText={(text) =>
           props.onChangeHandler(text.replace(/[^0-9]/g, ''))
@@ -27,5 +19,17 @@ const NumericInputWithLabel = (props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    marginTop: 10,
+    paddingLeft: 10,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
+});
 
 export default NumericInputWithLabel;
