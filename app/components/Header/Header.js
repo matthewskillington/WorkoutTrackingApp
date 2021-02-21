@@ -1,31 +1,31 @@
 import React from 'react';
-import { View, Text } from "react-native";
+import {View, Text, StyleSheet} from 'react-native';
 
-const HeaderComponent = () => {
-    return (
-    <View
-        style={{
-        padding: 10,
-        flexDirection: 'row'
-        }}>
-        <View
-            style={{
-            backgroundColor: `#A63838`,
-            width: 10,
-            height: 30, 
-            marginRight: 10
-        }}>
-        </View>
-        <Text
-            style={{
-            fontSize: 24,
-            color: '#A63838',
-            fontWeight: `bold`,
-        }}>
-        Workout Tracking
-        </Text>
+const Header = () => {
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.line}></View>
+      <Text style={styles.text}>Workout Tracking</Text>
     </View>
-    );
-}
+  );
+};
 
-export default HeaderComponent;
+const styles = StyleSheet.create({
+  wrapper: {
+    padding: 10,
+    flexDirection: 'row',
+  },
+  line: {
+    backgroundColor: `#A63838`,
+    width: 10,
+    height: 30,
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 24,
+    color: '#A63838',
+    fontWeight: `bold`,
+  },
+});
+
+export default Header;
