@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import ExerciseItem from '../ExerciseItem/ExerciseItem';
-import Header from '../Header/Header';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
 import exercises from '../../defaultExercises.js';
+import {Header, Title, Body, Container, Left, Right} from 'native-base';
 
 const HomeList = () => {
   const [list, setList] = useState([]);
@@ -60,36 +60,38 @@ const HomeList = () => {
   }
 
   return (
-    <>
-      <SafeAreaView style={styles.safeArea}>
-        <LogExerciseModal
-          modalVisible={modalVisible}
-          closeHandler={setModalVisible}
-          title={listSelection.name}
-        />
-        <Header />
-        <ScrollView style={styles.scrollView}>
-          {list.map((exercise) => {
-            return (
-              <ExerciseItem
-                key={exercise.name}
-                onPressHandler={OpenModal}
-                exerciseItem={exercise}
-              />
-            );
-          })}
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <View style={styles.wrapper}>
+      <Header>
+        <Body>
+          <Title>Workout Tracker</Title>
+        </Body>
+      </Header>
+      <LogExerciseModal
+        modalVisible={modalVisible}
+        closeHandler={setModalVisible}
+        title={listSelection.name}
+      />
+      <ScrollView style={styles.scrollView}>
+        {list.map((exercise) => {
+          return (
+            <ExerciseItem
+              key={exercise.name}
+              onPressHandler={OpenModal}
+              exerciseItem={exercise}
+            />
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
+  wrapper: {
+    backgroundColor: '#CCC',
     height: '100%',
   },
   scrollView: {
-    backgroundColor: '#CCC',
     height: '100%',
   },
 });
