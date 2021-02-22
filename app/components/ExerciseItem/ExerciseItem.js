@@ -1,7 +1,36 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, useColorScheme} from 'react-native';
+import {DarkTheme, LightTheme} from '../../colourThemes';
 
 const ExerciseItem = (props) => {
+  const colors = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
+
+  const styles = StyleSheet.create({
+    wrappingView: {
+      height: 97,
+      padding: 5,
+      width: `96%`,
+      margin: `2%`,
+      backgroundColor: colors.MasterGrey100,
+    },
+    topTitle: {
+      color: colors.TitleText,
+      fontWeight: '500',
+      fontSize: 18,
+    },
+    secondaryMessage: {
+      color: colors.SecondaryText,
+      fontWeight: '500',
+      fontSize: 14,
+    },
+    bottomWrapper: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      backgroundColor: colors.Success,
+      marginTop: 10,
+    },
+  });
+
   return (
     <View style={styles.wrappingView}>
       <Text style={styles.topTitle}>{props.exerciseItem.name}</Text>
@@ -20,31 +49,5 @@ const ExerciseItem = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  wrappingView: {
-    height: 97,
-    padding: 5,
-    width: `96%`,
-    margin: `2%`,
-    backgroundColor: '#FFF',
-  },
-  topTitle: {
-    color: '#1E1C26',
-    fontWeight: '500',
-    fontSize: 18,
-  },
-  secondaryMessage: {
-    color: '#595763',
-    fontWeight: '500',
-    fontSize: 14,
-  },
-  bottomWrapper: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: '#24ab75',
-    marginTop: 10,
-  },
-});
 
 export default ExerciseItem;
