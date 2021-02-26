@@ -1,9 +1,9 @@
-import React from 'react';
-import {View, Text, Button, StyleSheet, useColorScheme} from 'react-native';
-import {DarkTheme, LightTheme} from '../../colourThemes';
+import React, { useContext } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { ThemeContext } from '../../theme-context';
 
 const ExerciseItem = (props) => {
-  const colors = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
+  const colors = useContext(ThemeContext);
 
   const styles = StyleSheet.create({
     wrappingView: {
