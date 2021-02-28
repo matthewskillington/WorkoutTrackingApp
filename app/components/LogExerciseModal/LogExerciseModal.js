@@ -72,20 +72,20 @@ const LogExerciseModal = (props) => {
             <Text style={styles.modalTitle}>{props.title}</Text>
             <NumericInputWithLabel
               label="Reps"
-              repValue={repValue}
+              value={repValue}
               onChangeHandler={ChangeReps}
             />
 
             <NumericInputWithLabel
               label="Sets"
-              repValue={setValue}
+              value={setValue}
               onChangeHandler={ChangeSets}
             />
 
             <TouchableHighlight
               style={styles.openButton}
               onPress={() => {
-                props.closeHandler(!props.modalVisible);
+                props.closeHandler(repValue, setValue);
               }}>
               <Text style={styles.openButtonTextStyle}>Hide Modal</Text>
             </TouchableHighlight>

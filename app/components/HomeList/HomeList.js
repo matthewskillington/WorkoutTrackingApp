@@ -77,6 +77,13 @@ const HomeList = () => {
     setSelection(exercise);
   }
 
+  function HandleModalSubmission(reps, sets) {
+    setModalVisible(false);
+    listSelection.reps += (sets * reps);
+    listSelection.lastPerformed = Date.now()
+    AsyncStorage.setItem('exercise' + listSelection.id, JSON.stringify(listSelection));
+  }
+
   return (
     <View style={styles.wrapper}>
       <Header style={styles.header}>
@@ -86,7 +93,7 @@ const HomeList = () => {
       </Header>
       <LogExerciseModal
         modalVisible={modalVisible}
-        closeHandler={setModalVisible}
+        closeHandler={HandleModalSubmission}
         title={listSelection.name}
       />
       <ScrollView style={styles.scrollView}>

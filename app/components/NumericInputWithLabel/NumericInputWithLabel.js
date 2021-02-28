@@ -35,7 +35,7 @@ const NumericInputWithLabel = (props) => {
         onChangeText={(text) =>
           props.onChangeHandler(text.replace(/[^0-9]/g, ''))
         }
-        value={props.repValue}
+        value={props.value}
       />
     </View>
   );
