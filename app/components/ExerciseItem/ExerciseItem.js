@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { ThemeContext } from '../../theme-context';
 
@@ -31,6 +31,22 @@ const ExerciseItem = (props) => {
     },
   });
 
+  const [lastPerformedMessage, updateMessage] = useState("Ages ago");
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      updateMessage(getTimeSinceNow(props.exerciseItem.lastPerformed));
+    }, 10000);
+
+    return () => {
+      clearInterval(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    updateMessage(getTimeSinceNow(props.exerciseItem.lastPerformed));
+  }, [props.exerciseItem.lastPerformed]);
+
   function getTimeSinceNow(lastPerformed) {
     if (!isNaN(lastPerformed)) {
       let timeDiff = Date.now() - lastPerformed;
@@ -48,7 +64,7 @@ const ExerciseItem = (props) => {
     <View style={styles.wrappingView}>
       <Text style={styles.topTitle}>{props.exerciseItem.name}</Text>
       <Text style={styles.secondaryMessage}>
-        Last Performed: {getTimeSinceNow(props.exerciseItem.lastPerformed)}
+        Last Performed: {lastPerformedMessage}
       </Text>
       <View style={styles.bottomWrapper}>
         <Button
