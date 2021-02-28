@@ -14,7 +14,7 @@ const ExerciseItem = (props) => {
       backgroundColor: colors.MasterGrey100,
     },
     topTitle: {
-      color: colors.TitleText,
+      color: colors.PrimaryText,
       fontWeight: '500',
       fontSize: 18,
     },

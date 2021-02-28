@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Alert,
   Modal,
@@ -7,11 +7,56 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
+import { ThemeContext } from '../../theme-context.js';
 import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel.js';
 
 const LogExerciseModal = (props) => {
   const [repValue, ChangeReps] = React.useState('0');
   const [setValue, ChangeSets] = React.useState('0');
+  
+  const colors = useContext(ThemeContext);
+
+  const styles = StyleSheet.create({
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 22,
+    },
+    modalView: {
+      width: '80%',
+      margin: 20,
+      backgroundColor: colors.ModalBackground,
+      borderRadius: 20,
+      padding: 35,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    openButton: {
+      backgroundColor: '#2196F3',
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2,
+    },
+    openButtonTextStyle: {
+      color: colors.PrimaryText,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: '#FFF'
+    },
+    modalTitle: {
+      marginBottom: 20,
+      fontWeight: 'bold',
+      fontSize: 18,
+      color: colors.PrimaryText
+    },
+  });
 
   return (
     <View style={styles.centeredView}>
@@ -38,11 +83,11 @@ const LogExerciseModal = (props) => {
             />
 
             <TouchableHighlight
-              style={{...styles.openButton, backgroundColor: '#2196F3'}}
+              style={styles.openButton}
               onPress={() => {
                 props.closeHandler(!props.modalVisible);
               }}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.openButtonTextStyle}>Hide Modal</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -50,45 +95,5 @@ const LogExerciseModal = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    width: '80%',
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  openButton: {
-    backgroundColor: '#F194FF',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalTitle: {
-    marginBottom: 20,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-});
 
 export default LogExerciseModal;

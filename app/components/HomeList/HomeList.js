@@ -25,7 +25,7 @@ const HomeList = () => {
       backgroundColor: colors.MasterGrey100,
     },
     headerTitle: {
-      color: colors.TitleText
+      color: colors.PrimaryText
     }
   });
 
