@@ -1,15 +1,33 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import ExerciseItem from '../ExerciseItem/ExerciseItem';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
 import exercises from '../../defaultExercises.js';
 import {Header, Title, Body, Container, Left, Right} from 'native-base';
+import { ThemeContext } from '../../theme-context';
 
 const HomeList = () => {
   const [list, setList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [listSelection, setSelection] = useState('');
+  const colors = useContext(ThemeContext);
+
+  const styles = StyleSheet.create({
+    wrapper: {
+      backgroundColor: colors.MasterGrey70,
+      height: '100%',
+    },
+    scrollView: {
+      height: '100%',
+    },
+    header: {
+      backgroundColor: colors.MasterGrey100,
+    },
+    headerTitle: {
+      color: colors.TitleText
+    }
+  });
 
   useEffect(() => {
     AsyncStorage.getItem('alreadyLaunched').then((value) => {
@@ -61,9 +79,9 @@ const HomeList = () => {
 
   return (
     <View style={styles.wrapper}>
-      <Header>
+      <Header style={styles.header}>
         <Body>
-          <Title>Workout Tracker</Title>
+          <Title style={styles.headerTitle}>Workout Tracker</Title>
         </Body>
       </Header>
       <LogExerciseModal
@@ -85,15 +103,5 @@ const HomeList = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: '#CCC',
-    height: '100%',
-  },
-  scrollView: {
-    height: '100%',
-  },
-});
 
 export default HomeList;
