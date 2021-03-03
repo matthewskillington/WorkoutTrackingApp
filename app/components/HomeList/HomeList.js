@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useContext, useEffect, useState} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import {Header, Title, Body, Content, Icon, Left} from 'native-base';
+
 import ExerciseItem from '../ExerciseItem/ExerciseItem';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
 import exercises from '../../defaultExercises.js';
-import {Header, Title, Body, Container, Left, Right} from 'native-base';
 import { ThemeContext } from '../../theme-context';
 
 const HomeList = () => {
@@ -87,6 +88,11 @@ const HomeList = () => {
   return (
     <View style={styles.wrapper}>
       <Header style={styles.header}>
+        <Left>
+          <Content>
+            <Icon name='home'/>
+          </Content>
+        </Left>
         <Body>
           <Title style={styles.headerTitle}>Workout Tracker</Title>
         </Body>
