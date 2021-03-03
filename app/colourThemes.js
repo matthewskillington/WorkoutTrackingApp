@@ -1,15 +1,22 @@
-const LightTheme = {
-  MasterGrey100: '#FFF',
-  TitleText: '#1E1C26',
-  SecondaryText: '#595763',
-  Success: '#24ab75',
-};
+function LightThemeSpecifications() {
+  this.MasterGrey100 = '#FFF',
+  this.MasterGrey70 = '#CCC',
+  this.PrimaryText = '#1E1C26',
+  this.SecondaryText = '#595763',
+  this.Success = '#24ab75',
+  this.ModalBackground = this.MasterGrey100
+}
 
-const DarkTheme = {
-  MasterGrey100: '#3d3d3d',
-  TitleText: '#F6F6F6',
-  SecondaryText: '#bababa',
-  Success: '#24ab75',
-};
+function DarkThemeSpecifications() {
+  this.MasterGrey100 = '#3d3d3d',
+  this.MasterGrey70 = '#5c5c5c',
+  this.PrimaryText = '#F6F6F6',
+  this.SecondaryText = '#bababa',
+  this.Success = '#24ab75',
+  this.ModalBackground = this.MasterGrey70
+}
+
+const LightTheme = new LightThemeSpecifications();
+const DarkTheme = new DarkThemeSpecifications();
 
 export {LightTheme, DarkTheme};
