@@ -1,11 +1,15 @@
 import React from 'react';
 import { Text } from 'react-native';
+import CustomHeader from '../CustomHeader/CustomHeader';
 
-const MetricsPage = () => {
+const MetricsPage = ({navigation}) => {
     return (
-        <Text>
-            Welcome to the Metrics page
-        </Text>
+        <>
+            <CustomHeader navigation={navigation}/>
+            <Text>
+                    Welcome to the Metrics page
+            </Text>
+        </>
     )
 }
 
