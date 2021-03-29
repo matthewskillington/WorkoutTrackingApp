@@ -80,10 +80,6 @@ const HomeList = ({navigation}) => {
     AsyncStorage.setItem('exercise' + listSelection.id, JSON.stringify(listSelection));
   }
 
-  function OpenMenu() {
-    navigation.toggleDrawer()
-  }
-
   return (
     <View style={styles.wrapper}>
       <CustomHeader navigation={navigation}/>
