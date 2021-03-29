@@ -1,13 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useContext, useEffect, useState} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import { View, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+
 import ExerciseItem from '../ExerciseItem/ExerciseItem';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
 import exercises from '../../defaultExercises.js';
-import {Header, Title, Body, Container, Left, Right} from 'native-base';
 import { ThemeContext } from '../../theme-context';
 
-const HomeList = () => {
+import CustomHeader from '../CustomHeader/CustomHeader';
+
+const HomeList = ({navigation}) => {
   const [list, setList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [listSelection, setSelection] = useState('');
@@ -21,12 +23,6 @@ const HomeList = () => {
     scrollView: {
       height: '100%',
     },
-    header: {
-      backgroundColor: colors.MasterGrey100,
-    },
-    headerTitle: {
-      color: colors.PrimaryText
-    }
   });
 
   useEffect(() => {
@@ -86,11 +82,7 @@ const HomeList = () => {
 
   return (
     <View style={styles.wrapper}>
-      <Header style={styles.header}>
-        <Body>
-          <Title style={styles.headerTitle}>Workout Tracker</Title>
-        </Body>
-      </Header>
+      <CustomHeader navigation={navigation}/>
       <LogExerciseModal
         modalVisible={modalVisible}
         closeHandler={HandleModalSubmission}
