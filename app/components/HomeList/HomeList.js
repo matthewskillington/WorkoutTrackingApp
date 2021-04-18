@@ -8,12 +8,14 @@ import exercises from '../../defaultExercises.js';
 import { ThemeContext } from '../../theme-context';
 
 import CustomHeader from '../CustomHeader/CustomHeader';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const HomeList = ({navigation}) => {
   const [list, setList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [listSelection, setSelection] = useState('');
   const colors = useContext(ThemeContext);
+  const { StoreExercises, GetExercises } = useLocalStorage();
 
   const styles = StyleSheet.create({
     wrapper: {
@@ -29,43 +31,19 @@ const HomeList = ({navigation}) => {
     AsyncStorage.getItem('alreadyLaunched').then((value) => {
       if (value == null) {
         AsyncStorage.setItem('alreadyLaunched', JSON.stringify(true));
-        StoreExercises();
+        StoreExercises(exercises);
       }
-      GetExercises();
+      PopulateExercises();
     });
   }, []);
 
-  async function GetExercises() {
-    try {
-      var ids = JSON.parse(await AsyncStorage.getItem('exerciseList'));
-      var listFromDb = [];
-      for (const id of ids) {
-        const value = await AsyncStorage.getItem('exercise' + id);
-        if (value != null) {
-          listFromDb.push(JSON.parse(value));
-        }
-      }
-      setList(listFromDb);
-    } catch (e) {
-      console.log(e);
+  const PopulateExercises = async () => {
+    let exercisesFromStorage = await GetExercises();
+    if (exercisesFromStorage != null) {
+      setList(exercisesFromStorage);
     }
   }
-
-  function StoreExercises() {
-    try {
-      exercises.forEach((exercise) => {
-        AsyncStorage.setItem(
-          'exercise' + exercise.id,
-          JSON.stringify(exercise),
-        );
-      });
-      var listOfIds = exercises.map((item) => item.id);
-      AsyncStorage.setItem('exerciseList', JSON.stringify(listOfIds));
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
+ 
   // Exercise parameter is the exercise to be set as the current selection
   // Selected exercise is what data will be logged against
   function OpenModal(exercise) {
