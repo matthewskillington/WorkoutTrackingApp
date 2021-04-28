@@ -19,7 +19,8 @@ const CustomHeader = (props) => {
 		menuIcon: {
 		  height: 24,
 		  width: 24,
-		  margin: 20
+		  margin: 20,
+		  tintColor: colors.MasterGrey0
 		}
 	  });
 
@@ -34,7 +35,7 @@ const CustomHeader = (props) => {
           <TouchableOpacity activeOpacity = { .5 } onPress={OpenMenu}>
             <Image
               source={MenuImage}
-              style={styles.menuIcon} />
+              style={styles.menuIcon}/>
           </TouchableOpacity>
         </Left>
         <Body
