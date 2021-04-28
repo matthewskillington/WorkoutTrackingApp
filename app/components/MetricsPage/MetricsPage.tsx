@@ -5,15 +5,26 @@ import { ScrollView, Text, View } from 'react-native';
 import { GetExercises } from '../../localStorage/localStorage';
 import CustomHeader from '../CustomHeader/CustomHeader';
 
-const MetricsPage = ({navigation}) => {
-    const [list, setList] = useState([]);
+type Props = {
+    navigation: any
+}
+
+type Exercise = {
+    id: number,
+    name: string,
+    lastPerformed: string,
+    reps: number
+}
+
+const MetricsPage: React.FC<Props> = ({navigation}) => {
+    const [list, setList] = useState(new Array<Exercise>());
     
     useEffect(() => {
         PopulateExercises();
     })
 
     const PopulateExercises = async () => {
-        var exercises = await GetExercises();
+        const exercises = await GetExercises();
         if (exercises != null) {
             setList(exercises);
         }
