@@ -2,12 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { GetExercises } from '../../localStorage/localStorage';
 import CustomHeader from '../CustomHeader/CustomHeader';
 
 const MetricsPage = ({navigation}) => {
     const [list, setList] = useState([]);
-    const { GetExercises } = useLocalStorage();
     
     useEffect(() => {
         PopulateExercises();

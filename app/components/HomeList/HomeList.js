@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useContext, useEffect, useState} from 'react';
-import { View, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 
 import ExerciseItem from '../ExerciseItem/ExerciseItem';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
@@ -8,14 +8,13 @@ import exercises from '../../defaultExercises.js';
 import { ThemeContext } from '../../theme-context';
 
 import CustomHeader from '../CustomHeader/CustomHeader';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { GetExercises, StoreExercises } from '../../localStorage/localStorage';
 
 const HomeList = ({navigation}) => {
   const [list, setList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [listSelection, setSelection] = useState('');
   const colors = useContext(ThemeContext);
-  const { StoreExercises, GetExercises } = useLocalStorage();
 
   const styles = StyleSheet.create({
     wrapper: {
