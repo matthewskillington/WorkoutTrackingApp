@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect  } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { GetExercises } from '../../localStorage/localStorage';
 import { Exercise } from '../../types';
