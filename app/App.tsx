@@ -9,7 +9,7 @@ import { ThemeContext } from './theme-context';
 import { useColorScheme } from 'react-native';
 import { DarkTheme, LightTheme } from './colourThemes';
 
-const App: () => React$Node = () => {
+const App: React.FC = () => {
   const theme = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
 
   const Drawer = createDrawerNavigator();

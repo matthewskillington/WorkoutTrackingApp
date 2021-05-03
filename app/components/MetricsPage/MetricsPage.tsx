@@ -3,17 +3,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { GetExercises } from '../../localStorage/localStorage';
+import { Exercise } from '../../types';
 import CustomHeader from '../CustomHeader/CustomHeader';
 
 type Props = {
     navigation: any
-}
-
-type Exercise = {
-    id: number,
-    name: string,
-    lastPerformed: string,
-    reps: number
 }
 
 const MetricsPage: React.FC<Props> = ({navigation}) => {
