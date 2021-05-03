@@ -4,7 +4,7 @@ import { Header, Title, Body, Left, Right } from 'native-base';
 import { ThemeContext } from '../../theme-context';
 import MenuImage from '../../images/iconmonstr-menu-white.png';
 
-const CustomHeader = (props) => {
+const CustomHeader = (props: any) => {
 	const colors = useContext(ThemeContext);
 
 	const styles = StyleSheet.create({
