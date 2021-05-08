@@ -29,6 +29,7 @@ it('should store exercises when given an array of exercises', () => {
     //Act:
     StoreExercises(exercises);
 
+    //Assert:
     expect(mockSetItem).toHaveBeenCalledWith('exercise0', stringExercise1);
     expect(mockSetItem).toHaveBeenCalledWith('exercise1', stringExercise2);
 });
@@ -53,5 +54,6 @@ it('should store exerciseList when given an array of exercises', () => {
     //Act:
     StoreExercises(exercises);
 
+    //Assert:
     expect(mockSetItem).toHaveBeenCalledWith('exerciseList', "[0,1]");
 });
