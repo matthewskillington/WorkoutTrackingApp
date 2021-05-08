@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { ThemeContext } from '../../theme-context.js';
-import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel.js';
+import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel';
 
 const LogExerciseModal = (props) => {
   const [repValue, ChangeReps] = React.useState('0');

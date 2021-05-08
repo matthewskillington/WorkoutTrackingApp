@@ -2,6 +2,7 @@ import React from 'react';
 import 'react-native';
 import MetricsPage from './MetricsPage';
 import { render, waitFor } from '@testing-library/react-native';
+import { ReactTestInstance } from 'react-test-renderer';
 
 
 const mockNavigation = jest.fn();
@@ -47,7 +48,7 @@ describe('MetricsPage', () => {
 
         await waitFor(() => {
             expect(mockGetExercises).toHaveBeenCalled();
-            const children = getByTestId('scrollview-wrapper').children[0];
+            const children = getByTestId('scrollview-wrapper').children[0] as ReactTestInstance;
             expect(children.instance.props.children.length).toEqual(2);
         })
         
