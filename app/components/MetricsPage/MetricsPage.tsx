@@ -29,7 +29,8 @@ const MetricsPage: React.FC<Props> = ({navigation}) => {
             <Text>
                     Welcome to the Metrics page
             </Text>
-            <ScrollView>
+            <ScrollView
+                testID='scrollview-wrapper'>
                 {list.map((exercise) => {
                     return (
                         <View
