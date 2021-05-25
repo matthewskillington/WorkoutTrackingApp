@@ -12,12 +12,6 @@ jest.mock('../../localStorage/localStorage', () => ({
     GetExercises: () => mockGetExercises()
 }));
 
-const MockCustomHeader = jest.fn().mockImplementation(() => <></>);
-/*jest.mock('../CustomHeader/CustomHeader', () => ({
-    __esModule: true,
-    default: (props: any) => <MockCustomHeader {...props}/>,
-}));*/
-
 jest.mock("../CustomHeader/CustomHeader", () => {
     return {
       __esModule: true,
