@@ -8,9 +8,15 @@ import {
   StyleSheet,
 } from 'react-native';
 import { ThemeContext } from '../../theme-context.js';
-import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel.js';
+import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel';
 
-const LogExerciseModal = (props) => {
+type Props = {
+  modalVisible: boolean,
+  title: string,
+  closeHandler: (reps: number, sets: number) => void;
+}
+
+const LogExerciseModal: React.FC<Props> = (props) => {
   const [repValue, ChangeReps] = React.useState('0');
   const [setValue, ChangeSets] = React.useState('0');
   
@@ -45,7 +51,6 @@ const LogExerciseModal = (props) => {
       elevation: 2,
     },
     openButtonTextStyle: {
-      color: colors.PrimaryText,
       fontWeight: 'bold',
       textAlign: 'center',
       color: '#FFF'
@@ -72,20 +77,20 @@ const LogExerciseModal = (props) => {
             <Text style={styles.modalTitle}>{props.title}</Text>
             <NumericInputWithLabel
               label="Reps"
-              value={repValue}
+              value={repValue.toString()}
               onChangeHandler={ChangeReps}
             />
 
             <NumericInputWithLabel
               label="Sets"
-              value={setValue}
+              value={setValue.toString()}
               onChangeHandler={ChangeSets}
             />
 
             <TouchableHighlight
               style={styles.openButton}
               onPress={() => {
-                props.closeHandler(repValue, setValue);
+                props.closeHandler(parseInt(repValue), parseInt(setValue));
               }}>
               <Text style={styles.openButtonTextStyle}>Hide Modal</Text>
             </TouchableHighlight>

@@ -1,8 +1,14 @@
-import React, { useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import { ThemeContext } from '../../theme-context';
 
-const NumericInputWithLabel = (props) => {
+type Props = {
+  label: string;
+  onChangeHandler: Dispatch<SetStateAction<string>>;
+  value: string;
+}
+
+const NumericInputWithLabel: React.FC<Props> = (props) => {
   const colors = useContext(ThemeContext);
 
   const styles = StyleSheet.create({

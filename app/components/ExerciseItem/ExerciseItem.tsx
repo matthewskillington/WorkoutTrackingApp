@@ -1,8 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { ThemeContext } from '../../theme-context';
+import { Exercise } from '../../types';
 
-const ExerciseItem = (props) => {
+type Props = {
+  key: string,
+  onPressHandler: (exerciseItem: Exercise) => void,
+  exerciseItem: Exercise,
+}
+
+const ExerciseItem: React.FC<Props> = (props: Props) => {
   const colors = useContext(ThemeContext);
 
   const styles = StyleSheet.create({
@@ -47,7 +54,7 @@ const ExerciseItem = (props) => {
     updateMessage(getTimeSinceNow(props.exerciseItem.lastPerformed));
   }, [props.exerciseItem.lastPerformed]);
 
-  function getTimeSinceNow(lastPerformed) {
+  function getTimeSinceNow(lastPerformed: any): string {
     if (!isNaN(lastPerformed)) {
       let timeDiff = Date.now() - lastPerformed;
       if (timeDiff <= 60000) {
@@ -58,6 +65,7 @@ const ExerciseItem = (props) => {
         return "Ages ago";
       }
     }
+    return "Never";
   }
 
   return (

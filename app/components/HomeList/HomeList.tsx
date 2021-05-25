@@ -4,16 +4,21 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 
 import ExerciseItem from '../ExerciseItem/ExerciseItem';
 import LogExerciseModal from '../LogExerciseModal/LogExerciseModal';
-import exercises from '../../defaultExercises.js';
+import exercises from '../../defaultExercises';
 import { ThemeContext } from '../../theme-context';
 
 import CustomHeader from '../CustomHeader/CustomHeader';
 import { GetExercises, StoreExercises } from '../../localStorage/localStorage';
+import { Exercise } from '../../types';
 
-const HomeList = ({navigation}) => {
-  const [list, setList] = useState([]);
+type Props = {
+  navigation: any
+}
+
+const HomeList: React.FC<Props> = ({navigation}) => {
+  const [list, setList] = useState<Exercise[]>([]);
+  const [listSelection, setSelection] = useState<any>({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [listSelection, setSelection] = useState('');
   const colors = useContext(ThemeContext);
 
   const styles = StyleSheet.create({
@@ -45,12 +50,12 @@ const HomeList = ({navigation}) => {
  
   // Exercise parameter is the exercise to be set as the current selection
   // Selected exercise is what data will be logged against
-  function OpenModal(exercise) {
+  function OpenModal(exercise: Exercise) {
     setModalVisible(true);
     setSelection(exercise);
   }
 
-  function HandleModalSubmission(reps, sets) {
+  function HandleModalSubmission(reps: number, sets: number) {
     setModalVisible(false);
     listSelection.reps += (sets * reps);
     listSelection.lastPerformed = Date.now()
@@ -66,7 +71,7 @@ const HomeList = ({navigation}) => {
         title={listSelection.name}
       />
       <ScrollView style={styles.scrollView}>
-        {list.map((exercise) => {
+        {list.map((exercise: Exercise) => {
           return (
             <ExerciseItem
               key={exercise.name}

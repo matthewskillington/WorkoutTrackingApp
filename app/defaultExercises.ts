@@ -1,4 +1,6 @@
-const ExerciseList = [
+import { Exercise } from "./types";
+
+const ExerciseList: Exercise[] = [
   {
     id: 1,
     name: 'Dumbbell Curl',

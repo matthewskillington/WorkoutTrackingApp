@@ -8,8 +8,9 @@ import MetricsPage from './components/MetricsPage/MetricsPage';
 import { ThemeContext } from './theme-context';
 import { useColorScheme } from 'react-native';
 import { DarkTheme, LightTheme } from './colourThemes';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const App: () => React$Node = () => {
+const App: React.FC = () => {
   const theme = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
 
   const Drawer = createDrawerNavigator();
@@ -18,10 +19,12 @@ const App: () => React$Node = () => {
     <NavigationContainer>
       <ThemeContext.Provider
         value={theme}>
-        <Drawer.Navigator initialRouteName="Home">
-          <Drawer.Screen name="Home" component={HomeList}/>
-          <Drawer.Screen name="Metrics" component={MetricsPage}/>
-        </Drawer.Navigator>
+        <SafeAreaView style={{flex: 1}}>
+          <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Home" component={HomeList}/>
+            <Drawer.Screen name="Metrics" component={MetricsPage}/>
+          </Drawer.Navigator>
+        </SafeAreaView>
       </ThemeContext.Provider>
     </NavigationContainer>
     
