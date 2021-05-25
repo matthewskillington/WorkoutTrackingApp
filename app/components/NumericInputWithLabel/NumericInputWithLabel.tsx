@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import { ThemeContext } from '../../theme-context';
 
 type Props = {
   label: string;
-  onChangeHandler: (text: string) => {};
+  onChangeHandler: Dispatch<SetStateAction<string>>;
   value: string;
 }
 
