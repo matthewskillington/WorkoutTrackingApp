@@ -1,6 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Exercise } from '../types';
 
+type GetExercisesWithMaxResponse = {
+  exercises: Exercise[],
+  max: number
+}
+
 const StoreExercises = (exercises: Array<Exercise>): void => {
   console.log('storing exercises');
   try {
@@ -31,4 +36,24 @@ const GetExercises = async (): Promise<Array<Exercise>> => {
   return listFromDb;
 };
 
-export { StoreExercises, GetExercises };
+const GetExercisesWithMax = async (): Promise<GetExercisesWithMaxResponse> => {
+  const listFromDb: Array<Exercise> = [];
+  let max = 0;
+  try {
+    const ids = JSON.parse(await AsyncStorage.getItem('exerciseList') || '');
+    
+    for (const id of ids) {
+      const value = await AsyncStorage.getItem('exercise' + id);
+      if (value != null) {
+        const parsedObject = JSON.parse(value) as Exercise;
+        max = parsedObject.reps > max ? parsedObject.reps : max;
+        listFromDb.push(parsedObject);
+      }
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return {exercises: listFromDb, max: max};
+};
+
+export { StoreExercises, GetExercises, GetExercisesWithMax };

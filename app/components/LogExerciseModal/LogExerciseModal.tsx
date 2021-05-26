@@ -92,7 +92,7 @@ const LogExerciseModal: React.FC<Props> = (props) => {
               onPress={() => {
                 props.closeHandler(parseInt(repValue), parseInt(setValue));
               }}>
-              <Text style={styles.openButtonTextStyle}>Hide Modal</Text>
+              <Text style={styles.openButtonTextStyle}>Submit</Text>
             </TouchableHighlight>
           </View>
         </View>

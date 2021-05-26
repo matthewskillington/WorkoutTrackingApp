@@ -9,7 +9,7 @@ const mockNavigation = jest.fn();
 
 const mockGetExercises = jest.fn();
 jest.mock('../../localStorage/localStorage', () => ({
-    GetExercises: () => mockGetExercises()
+    GetExercisesWithMax: () => mockGetExercises()
 }));
 
 jest.mock("../CustomHeader/CustomHeader", () => {
@@ -25,19 +25,23 @@ describe('MetricsPage', () => {
     });
 
     it('should GetExercises from localStorage', async () => {
-        mockGetExercises.mockReturnValue([
-          {
-            id: 1,
-            name: 'Dumbbell Curl',
-            lastPerformed: '',
-            reps: 0,
-          },
-          {
-            id: 2,
-            name: 'Dumbbell Row',
-            lastPerformed: '',
-            reps: 0,
-          }])
+        mockGetExercises.mockReturnValue({
+          exercises:
+          [
+            {
+              id: 1,
+              name: 'Dumbbell Curl',
+              lastPerformed: '',
+              reps: 0,
+            },
+            {
+              id: 2,
+              name: 'Dumbbell Row',
+              lastPerformed: '',
+              reps: 0,
+            }
+          ],
+          max: 0});
         const { getByTestId } = render(<MetricsPage navigation={mockNavigation}/>);
 
         await waitFor(() => {
