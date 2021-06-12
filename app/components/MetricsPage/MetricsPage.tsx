@@ -21,12 +21,14 @@ const MetricsPage: React.FC<Props> = ({navigation}) => {
             fontSize: 18,
             margin: '2%',
             marginVertical: 20,
-            fontWeight: '300'
+            fontWeight: '300',
+            color: colors.PrimaryText,
         },
         itemTitle: {
             fontSize: 18,
             margin: '2%',
-            fontWeight: '300'
+            fontWeight: '300',
+            color: colors.PrimaryText,
         },
         itemWrapper: {
             backgroundColor: colors.MasterGrey100,
@@ -45,7 +47,14 @@ const MetricsPage: React.FC<Props> = ({navigation}) => {
         },
         repCount: {
             margin: 5,
-            color: colors.MasterGrey100,
+            color: '#FFF',
+        },
+        wrapper: {
+            backgroundColor: colors.MasterGrey70,
+            height: '100%',
+        },
+        updatedText: {
+            color: colors.SecondaryText,
         }
     });
     
@@ -68,7 +77,7 @@ const MetricsPage: React.FC<Props> = ({navigation}) => {
     }
 
     return (
-        <>
+        <View style={styles.wrapper}>
             <CustomHeader navigation={navigation}/>
             <Text style={styles.pageTitle}>
                     Welcome to the Metrics page
@@ -86,12 +95,12 @@ const MetricsPage: React.FC<Props> = ({navigation}) => {
                                 style={[styles.progressBar, widthStyle(exercise.reps)]}>
                                 <Text style={styles.repCount}>{exercise.reps}</Text>
                             </View>
-                            <Text>Updated: {getTimeSinceNow(exercise.lastPerformed)}</Text>
+                            <Text style={styles.updatedText}>Updated: {getTimeSinceNow(exercise.lastPerformed)}</Text>
                         </View>
                     );
                 })}
             </ScrollView>
-        </>
+        </View>
     )
 }
 
