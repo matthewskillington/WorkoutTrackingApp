@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { getTimeSinceNow } from '../../helpers/timeSinceNowHelper';
 import { ThemeContext } from '../../theme-context';
 import { Exercise } from '../../types';
 
@@ -53,20 +54,6 @@ const ExerciseItem: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     updateMessage(getTimeSinceNow(props.exerciseItem.lastPerformed));
   }, [props.exerciseItem.lastPerformed]);
-
-  function getTimeSinceNow(lastPerformed: any): string {
-    if (!isNaN(lastPerformed)) {
-      let timeDiff = Date.now() - lastPerformed;
-      if (timeDiff <= 60000) {
-        return "Just now";
-      } else if (timeDiff < 3600000) {
-        return Math.floor(timeDiff / 60000).toString() + " minutes ago";
-      } else {
-        return "Ages ago";
-      }
-    }
-    return "Never";
-  }
 
   return (
     <View style={styles.wrappingView}>
