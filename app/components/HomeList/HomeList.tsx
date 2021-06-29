@@ -55,11 +55,13 @@ const HomeList: React.FC<Props> = ({navigation}) => {
     setSelection(exercise);
   }
 
-  function HandleModalSubmission(reps: number, sets: number) {
+  function HandleModalSubmission(reps: number, sets: number, cancelled: boolean) {
     setModalVisible(false);
-    listSelection.reps += (sets * reps);
-    listSelection.lastPerformed = Date.now()
-    AsyncStorage.setItem('exercise' + listSelection.id, JSON.stringify(listSelection));
+    if(!cancelled){
+      listSelection.reps += (sets * reps);
+      listSelection.lastPerformed = Date.now()
+      AsyncStorage.setItem('exercise' + listSelection.id, JSON.stringify(listSelection));
+    }
   }
 
   return (

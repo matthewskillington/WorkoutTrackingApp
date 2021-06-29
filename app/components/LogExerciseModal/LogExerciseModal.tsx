@@ -6,6 +6,8 @@ import {
   TouchableHighlight,
   View,
   StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { ThemeContext } from '../../theme-context.js';
 import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabel';
@@ -13,8 +15,10 @@ import NumericInputWithLabel from '../NumericInputWithLabel/NumericInputWithLabe
 type Props = {
   modalVisible: boolean,
   title: string,
-  closeHandler: (reps: number, sets: number) => void;
+  closeHandler: (reps: number, sets: number, cancelled: boolean) => void;
 }
+
+const CloseImage = require('../../images/iconmonstr-x-mark-2-24.png');
 
 const LogExerciseModal: React.FC<Props> = (props) => {
   const [repValue, ChangeReps] = React.useState('0');
@@ -61,6 +65,15 @@ const LogExerciseModal: React.FC<Props> = (props) => {
       fontSize: 18,
       color: colors.PrimaryText
     },
+    closeIcon: {
+      height: 16,
+      width: 16,
+      marginLeft: 'auto',
+      marginTop: 5,
+    },
+    titleAndClose: {
+      flexDirection: 'row',
+    }
   });
 
   return (
@@ -74,7 +87,18 @@ const LogExerciseModal: React.FC<Props> = (props) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>{props.title}</Text>
+            <View style={styles.titleAndClose}>
+              <Text style={styles.modalTitle}>{props.title}</Text>
+              <TouchableWithoutFeedback
+                onPress={() => props.closeHandler(0,0,true)}>
+                <Image
+                  source={CloseImage}
+                  style={styles.closeIcon}
+                />
+              </TouchableWithoutFeedback>
+              
+            </View>
+
             <NumericInputWithLabel
               label="Reps"
               value={repValue.toString()}
@@ -90,7 +114,7 @@ const LogExerciseModal: React.FC<Props> = (props) => {
             <TouchableHighlight
               style={styles.openButton}
               onPress={() => {
-                props.closeHandler(parseInt(repValue), parseInt(setValue));
+                props.closeHandler(parseInt(repValue), parseInt(setValue), false);
               }}>
               <Text style={styles.openButtonTextStyle}>Submit</Text>
             </TouchableHighlight>

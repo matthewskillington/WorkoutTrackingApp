@@ -42,13 +42,7 @@ const ExerciseItem: React.FC<Props> = (props: Props) => {
   const [lastPerformedMessage, updateMessage] = useState("Ages ago");
 
   useEffect(() => {
-    let timer = setInterval(() => {
       updateMessage(getTimeSinceNow(props.exerciseItem.lastPerformed));
-    }, 10000);
-
-    return () => {
-      clearInterval(timer);
-    }
   }, []);
 
   useEffect(() => {
