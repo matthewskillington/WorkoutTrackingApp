@@ -1,6 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { GetLeastPerformedExercise } from '../../localStorage/localStorage';
 import { ThemeContext } from '../../theme-context';
+import { Exercise } from '../../types';
 import CustomHeader from '../CustomHeader/CustomHeader';
 
 type Props = {
@@ -8,7 +10,20 @@ type Props = {
 }
 
 const SuggestExercise: React.FC<Props> = ({navigation}) => {
+    const [currentExercise, setCurrentExercise] = useState<Exercise | undefined>();
     const colors = useContext(ThemeContext);
+
+    useEffect(() => {
+        setData();
+    }, [])
+    
+
+    const setData = async () => {
+        const exercise = await GetLeastPerformedExercise();
+        if (exercise != null){
+            setCurrentExercise(exercise);
+        }
+    }
 
     const styles = StyleSheet.create({
         wrapper: {
@@ -62,7 +77,7 @@ const SuggestExercise: React.FC<Props> = ({navigation}) => {
                 <View style={styles.suggestionItem}>
                     <View style={styles.titleWrapper}>
                         <Text style={styles.exerciseTitle}>
-                            Bench Press
+                            {currentExercise?.name}
                         </Text>
                     </View>
 
@@ -75,6 +90,7 @@ const SuggestExercise: React.FC<Props> = ({navigation}) => {
                         
                         
                         <TouchableOpacity
+                            onPress={() => setData()}
                             style={styles.nextButton}>
                             <Text style={styles.nextButtonText}>Next</Text>
                         </TouchableOpacity>

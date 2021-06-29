@@ -56,4 +56,15 @@ const GetExercisesWithMax = async (): Promise<GetExercisesWithMaxResponse> => {
   return {exercises: listFromDb, max: max};
 };
 
-export { StoreExercises, GetExercises, GetExercisesWithMax };
+const GetLeastPerformedExercise = async (): Promise<Exercise> => {
+  const exercises = await GetExercises();
+  let leastPerformed = exercises[0];
+  exercises.forEach((exercise) => {
+    if(exercise.reps < leastPerformed.reps) {
+      leastPerformed = exercise;
+    }
+  });
+  return leastPerformed;
+}
+
+export { StoreExercises, GetExercises, GetExercisesWithMax, GetLeastPerformedExercise };

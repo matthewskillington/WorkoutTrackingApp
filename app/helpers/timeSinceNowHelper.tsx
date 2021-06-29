@@ -8,11 +8,11 @@ export function getTimeSinceNow(lastPerformed: any): string {
       let timeDiff = Date.now() - lastPerformed;
       if (timeDiff <= Minute) {
         return "Just now";
-      } else if (timeDiff < Hour) {
+      } else if (timeDiff <= Hour) {
         return Math.floor(timeDiff / Minute).toString() + " minutes ago";
-      } else if (timeDiff < Day) {
+      } else if (timeDiff <= Day) {
         return Math.floor(timeDiff / Hour).toString() + " hours ago";
-      } else if (timeDiff < Year) {
+      } else if (timeDiff <= Year) {
         return Math.floor(timeDiff / Day).toString() + " days ago";
       } else {
         return "Over a year ago";
