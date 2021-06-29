@@ -5,10 +5,12 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 
 import HomeList from './components/HomeList/HomeList';
 import MetricsPage from './components/MetricsPage/MetricsPage';
+import SuggestExercise from './components/SuggestExercise/SuggestExercise';
 import { ThemeContext } from './theme-context';
 import { StyleSheet, useColorScheme } from 'react-native';
 import { DarkTheme, LightTheme } from './colourThemes';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const App: React.FC = () => {
   const theme = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
@@ -43,6 +45,7 @@ const App: React.FC = () => {
           <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen name="Home" component={HomeList}/>
             <Drawer.Screen name="Metrics" component={MetricsPage}/>
+            <Drawer.Screen name="Suggest Exercise" component={SuggestExercise}/>
           </Drawer.Navigator>
         </SafeAreaView>
       </ThemeContext.Provider>
