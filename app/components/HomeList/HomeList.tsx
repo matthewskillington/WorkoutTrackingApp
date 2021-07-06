@@ -17,7 +17,7 @@ type Props = {
 
 const HomeList: React.FC<Props> = ({navigation}) => {
   const [list, setList] = useState<Exercise[]>([]);
-  const [listSelection, setSelection] = useState<any>({});
+  const [listSelection, setSelection] = useState<Exercise | undefined>();
   const [modalVisible, setModalVisible] = useState(false);
   const colors = useContext(ThemeContext);
 
@@ -57,7 +57,7 @@ const HomeList: React.FC<Props> = ({navigation}) => {
 
   function HandleModalSubmission(reps: number, sets: number, cancelled: boolean) {
     setModalVisible(false);
-    if(!cancelled){
+    if(!cancelled && listSelection){
       listSelection.reps += (sets * reps);
       listSelection.lastPerformed = Date.now()
       AsyncStorage.setItem('exercise' + listSelection.id, JSON.stringify(listSelection));
@@ -70,7 +70,7 @@ const HomeList: React.FC<Props> = ({navigation}) => {
       <LogExerciseModal
         modalVisible={modalVisible}
         closeHandler={HandleModalSubmission}
-        title={listSelection.name}
+        title={listSelection?.name || ''}
       />
       <ScrollView style={styles.scrollView}>
         {list.map((exercise: Exercise) => {
