@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GetLeastPerformedExercise } from '../../localStorage/localStorage';
 import { ThemeContext } from '../../theme-context';
 import { Exercise } from '../../types';
@@ -24,6 +24,14 @@ const suggestExercise = (seed: number): SuggestedExercise => {
     }
     return { reps: 12, sets: 3};
 }
+
+const ExerciseImage1 = require('../../images/exercise-images/dumbbellOnMat.jpg');
+const ExerciseImage2 = require('../../images/exercise-images/dumbbellRack.jpg');
+const ExerciseImage3 = require('../../images/exercise-images/dumbbellRow.jpg');
+const ExerciseImage4 = require('../../images/exercise-images/tricepDip.jpg');
+const ExerciseImage5 = require('../../images/exercise-images/barbell.jpeg');
+
+const ExerciseImages = [ExerciseImage1, ExerciseImage2, ExerciseImage3, ExerciseImage4, ExerciseImage5];
 
 
 const SuggestExercise: React.FC<Props> = ({navigation}) => {
@@ -77,14 +85,14 @@ const SuggestExercise: React.FC<Props> = ({navigation}) => {
             textAlign: 'center'
         },
         titleWrapper: {
-            backgroundColor: colors.PrimaryText,
+            backgroundColor: colors.MasterGrey50,
         },
         exerciseTitle: {
             alignSelf: 'flex-start',
             fontSize: 18,
             margin: 15,
             fontWeight: '300',
-            color: colors.MasterGrey100,
+            color: '#FFF',
         },
         setRepWrapper: {
             marginBottom: 50
@@ -93,9 +101,23 @@ const SuggestExercise: React.FC<Props> = ({navigation}) => {
             textAlign: 'center',
             fontSize: 18,
             fontWeight: '600',
+            color: colors.PrimaryText,
         },
         bottomWrapper: {
             marginTop: 'auto',
+            paddingTop: 15,
+        },
+        imageWrapper: {
+            backgroundColor: '#eee',
+            flex: 1,
+            overflow: 'hidden',
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        },
+        exerciseImage: {
+            alignSelf: 'center',
+            height:'100%', 
+            width:'100%'
         }
       });
 
@@ -108,6 +130,12 @@ const SuggestExercise: React.FC<Props> = ({navigation}) => {
                         <Text style={styles.exerciseTitle}>
                             {currentExercise?.name}
                         </Text>
+                    </View>
+
+                    <View style={styles.imageWrapper}>
+                        <Image
+                            source={ExerciseImage5}
+                            style={styles.exerciseImage}/>
                     </View>
 
                     <View style={styles.bottomWrapper}>
